@@ -13,12 +13,14 @@ def get_with_chained_keys(dic: dict, keys: list, default=None):
     :param default: 找不到键时的默认返回值
     :return:
     """
+    if len(keys) == 0:
+        return default
     k = keys[0]
     if k not in dic:
         return default
     if len(keys) == 1:
         return dic[k]
-    return get_with_chained_keys(dic[k], keys[1:])
+    return get_with_chained_keys(dic[k], keys[1:], default)
 
 
 def path_not_exist(path: str | Path) -> bool:

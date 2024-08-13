@@ -1,3 +1,7 @@
+# v0.2.0
+
+- 合并了 pyside6 的工具集，作为可选内容
+
 # v0.1.1
 
 - 简化 `jnp.path.get_log_dir`

@@ -13,9 +13,13 @@ authors = [
 readme = "README.md"
 license = {file = "LICENSE"}
 
-
 dependencies = []
 requires-python = ">=3.10"
+
+[project.optional-dependencies]
+gui = [
+    "PySide6-Essentials==6.5.2"
+]
 
 [tool.setuptools.dynamic]
 version = {attr = "jnp3.__version__"}

@@ -1,5 +1,4 @@
 # coding: utf8
-from pathlib import Path
 
 
 def get_with_chained_keys(dic: dict, keys: list, default=None):
@@ -21,32 +20,6 @@ def get_with_chained_keys(dic: dict, keys: list, default=None):
     if len(keys) == 1:
         return dic[k]
     return get_with_chained_keys(dic[k], keys[1:], default)
-
-
-def path_not_exist(path: str | Path) -> bool:
-    """
-    判断目标路径是否存在
-    如果参数为空或者 None，亦认为不存在
-
-    :param path: 目标路径
-    :return:
-    """
-    if isinstance(path, str):
-        return len(path) == 0 or not Path(path).exists()
-    elif isinstance(path, Path):
-        return not path.exists()
-    else:
-        return True
-
-
-def path_exists(path: str | Path) -> bool:
-    """
-    对 path_not_exist 的相反包装
-
-    :param path: 目标路径
-    :return:
-    """
-    return not path_not_exist(path)
 
 
 def append_dic(dic: dict, sub_dic: dict):

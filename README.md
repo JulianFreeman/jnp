@@ -31,3 +31,12 @@ pip install jnp3[gui]@https://github.com/JulianFreeman/jnp3/releases/download/v0
 ```shell
 pip install jnp3[gui]@git+https://github.com/JulianFreeman/jnp3.git@v0.2.0
 ```
+
+## 构建
+
+```shell
+pip install build
+python -m build
+```
+
+更多见 [文档](https://setuptools.pypa.io/en/latest/userguide/quickstart.html)

@@ -1,5 +1,4 @@
 # coding: utf8
-import sys
 import unittest
 from unittest import TestCase
 
@@ -88,7 +87,7 @@ class MainTestCase(TestCase):
         self.assertDictEqual(dic, exp_dic)
 
     def test_log_dir(self):
-        self.assertIsNotNone(get_log_dir(sys.platform))
+        self.assertIsNotNone(get_log_dir())
 
 
 if __name__ == '__main__':

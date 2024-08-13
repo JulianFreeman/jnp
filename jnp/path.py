@@ -1,5 +1,6 @@
 # coding: utf8
 import os
+import sys
 from pathlib import Path
 
 
@@ -29,15 +30,11 @@ def path_exists(path: str | Path) -> bool:
     return not path_not_exist(path)
 
 
-def get_log_dir(plat: str) -> str | None:
-    match plat:
-        case "win32":
-            log_dir = os.path.expandvars("%appdata%")
-        case "darwin":
-            log_dir = os.path.expanduser("~") + "/Library/Application Support"
-        case _:
-            return None
-    if path_exists(log_dir):
-        return log_dir
+def get_log_dir() -> str | None:
+    if sys.platform == "win32":
+        log_dir = os.path.expandvars("%appdata%")
+    elif sys.platform == "darwin":
+        log_dir = os.path.expanduser("~") + "/Library/Application Support"
     else:
         return None
+    return log_dir if path_exists(log_dir) else None

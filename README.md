@@ -4,9 +4,29 @@
 
 > 名称中的 3 是指 python3，同时也是为了避免和已存在的包冲突。
 
+## 安装
+
+安装预构建的 `.whl` 包：
+
+```sh
+pip install https://github.com/JulianFreeman/jnp3/releases/download/v0.2.0/jnp3-0.2.0-py3-none-any.whl
+```
+
+通过源码安装：
+
+```sh
+pip install git+https://github.com/JulianFreeman/jnp3.git@v0.2.0
+```
+
 ## 安装可选的 pyside6 工具集
 
-暂时只能通过源码安装（修改版本号以安装不同的版本）：
+安装预构建的 `.whl` 包：
+
+```shell
+pip install jnp3[gui]@https://github.com/JulianFreeman/jnp3/releases/download/v0.2.0/jnp3-0.2.0-py3-none-any.whl
+```
+
+通过源码安装：
 
 ```shell
 pip install pip install jnp3[gui]@git+https://github.com/JulianFreeman/jnp3.git@v0.2.0

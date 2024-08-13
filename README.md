@@ -6,9 +6,8 @@
 
 ## 安装可选的 pyside6 工具集
 
-暂时只能通过源码安装：
+暂时只能通过源码安装（修改版本号以安装不同的版本）：
 
 ```shell
-# 修改版本号以安装不同的版本
-pip install git+https://github.com/JulianFreeman/jnp3.git@v0.2.0#egg=jnp3[gui]
+pip install pip install jnp3[gui]@git+https://github.com/JulianFreeman/jnp3.git@v0.2.0
 ```

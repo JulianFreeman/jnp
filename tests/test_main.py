@@ -2,9 +2,9 @@
 import unittest
 from unittest import TestCase
 
-from jnp.misc import deprecated, url2cn, group_by
-from jnp.path import path_not_exist, get_log_dir
-from jnp.dict import get_with_chained_keys, append_dic
+from jnp3.misc import deprecated, url2cn, group_by
+from jnp3.path import path_not_exist, get_log_dir
+from jnp3.dict import get_with_chained_keys, append_dic
 
 
 @deprecated("Use `ord`")

@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 dynamic = ["version"]
 
-name = "jnp"
+name = "jnp3"
 description = "一个 Python 语言的辅助工具集"
 authors = [
     {name = "Julian Freeman", email = "freemanjulian372@gmail.com"}
@@ -18,4 +18,4 @@ dependencies = []
 requires-python = ">=3.10"
 
 [tool.setuptools.dynamic]
-version = {attr = "jnp.__version__"}
+version = {attr = "jnp3.__version__"}

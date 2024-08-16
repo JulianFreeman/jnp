@@ -1,3 +1,8 @@
+# v0.3.0
+
+- 升级 `PushButtonWithId` 为 `PushButtonWithItem` 以支持更多类型
+- 增加 `CardsArea` 和 `Card` 类
+
 # v0.2.0
 
 - 合并了 pyside6 的工具集，作为可选内容

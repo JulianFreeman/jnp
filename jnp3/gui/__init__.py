@@ -9,5 +9,5 @@ from .misc import accept_warning
 from .widgets import *
 
 
-__all__ = ["accept_warning", "StyleComboBox", "PushButtonWithId",
-           "HorizontalLine", "VerticalLine"]
+__all__ = ["accept_warning", "StyleComboBox", "PushButtonWithItem",
+           "HorizontalLine", "VerticalLine", "Card", "CardsArea"]

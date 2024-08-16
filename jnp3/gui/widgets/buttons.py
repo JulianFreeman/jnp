@@ -3,14 +3,14 @@ from PySide6.QtCore import Signal
 from PySide6.QtWidgets import QPushButton, QWidget
 
 
-class PushButtonWithId(QPushButton):
+class PushButtonWithItem(QPushButton):
 
-    clicked_with_id = Signal(str)
+    clicked_with_item = Signal(object)
 
-    def __init__(self, ids: str, parent: QWidget = None, title: str = ""):
+    def __init__(self, item: object, title: str = "", parent: QWidget = None):
         super().__init__(title, parent)
-        self.ids = ids
+        self.item = item
         self.clicked.connect(self.on_self_clicked)
 
     def on_self_clicked(self):
-        self.clicked_with_id.emit(self.ids)
+        self.clicked_with_item.emit(self.item)

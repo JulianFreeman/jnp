@@ -1,6 +1,6 @@
 # coding: utf8
 from PySide6 import QtWidgets, QtCore, QtGui
-from jnp3.gui import CardsArea
+from jnp3.gui import CardsArea, Card
 
 
 class UiWg(object):
@@ -122,6 +122,7 @@ class MainWindow(QtWidgets.QWidget):
         self.setLayout(self.vly_m)
 
         self.ca = CardsArea(self)
+        self.ca.card_removed.connect(self.on_card_removed)
         self.vly_m.addWidget(self.ca)
 
         self.c1 = self.ca.add_card(Wg(self), "示例1", QtGui.QIcon("chrome_32.png"))
@@ -130,6 +131,9 @@ class MainWindow(QtWidgets.QWidget):
 
     def sizeHint(self):
         return QtCore.QSize(300, 100)
+
+    def on_card_removed(self, card: Card):
+        print(card.title)
 
 
 if __name__ == '__main__':

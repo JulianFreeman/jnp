@@ -1,4 +1,5 @@
 # coding: utf8
+from PySide6.QtCore import Signal
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QGroupBox,
@@ -58,6 +59,8 @@ class Card(QGroupBox):
 
 class CardsArea(QScrollArea):
 
+    card_removed = Signal(Card)
+
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWidgetResizable(True)
@@ -86,3 +89,5 @@ class CardsArea(QScrollArea):
         self.vly_cw.removeWidget(card)
         self.cards.remove(card)
         card.deleteLater()
+
+        self.card_removed.emit(card)

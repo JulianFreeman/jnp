@@ -1,5 +1,5 @@
 # coding: utf8
-from PySide6 import QtWidgets, QtCore
+from PySide6 import QtWidgets, QtCore, QtGui
 from jnp3.gui import CardsArea
 
 
@@ -124,9 +124,9 @@ class MainWindow(QtWidgets.QWidget):
         self.ca = CardsArea(self)
         self.vly_m.addWidget(self.ca)
 
-        self.c1 = self.ca.add_card(Wg(self), "示例1")
+        self.c1 = self.ca.add_card(Wg(self), "示例1", QtGui.QIcon("chrome_32.png"))
         self.c2 = self.ca.add_card(Wg(self), "示例2")
-        self.c3 = self.ca.add_card(title="示例3")
+        self.c3 = self.ca.add_card(title="示例3", icon=QtGui.QIcon("chrome_32.png"))
 
     def sizeHint(self):
         return QtCore.QSize(300, 100)

@@ -16,10 +16,20 @@ license = {file = "LICENSE"}
 dependencies = []
 requires-python = ">=3.10"
 
+classifiers = [
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+]
+
 [project.optional-dependencies]
 gui = [
     "PySide6-Essentials==6.5.2"
 ]
+
+[project.urls]
+Homepage = "https://github.com/JulianFreeman/jnp3"
+Repository = "https://github.com/JulianFreeman/jnp3.git"
+Changelog = "https://github.com/JulianFreeman/jnp3/blob/main/CHANGELOG.md"
 
 [tool.setuptools.dynamic]
 version = {attr = "jnp3.__version__"}

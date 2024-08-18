@@ -29,9 +29,6 @@ class BlockingDialog(QDialog):
         super().__init__(parent)
         self.setWindowTitle(title)
 
-        # 设置对话框为模态
-        self.setModal(True)
-
         # 设置没有关闭按钮
         self.setWindowFlags(self.windowFlags() & ~Qt.WindowCloseButtonHint)
 
@@ -56,5 +53,6 @@ def run_some_task(title: str, msg: str, parent: QWidget, func: Callable, *args, 
     bda = BlockingDialog(title, msg, parent)
     worker.finished.connect(bda.close)
 
-    bda.show()
     worker.start()
+    # 堵塞，防止误触
+    bda.exec()

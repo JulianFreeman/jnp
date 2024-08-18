@@ -38,13 +38,16 @@ class _StyleListModel(QAbstractListModel):
 
 class StyleComboBox(QComboBox):
 
-    def __init__(self, parent: QWidget = None):
+    def __init__(self, default_style: int = 0, parent: QWidget = None):
         super().__init__(parent)
         self.setModel(_StyleListModel(self))
         self.currentIndexChanged.connect(self.on_self_current_index_changed)
 
+        self.setCurrentIndex(default_style)
+
     def on_self_current_index_changed(self, index: int):
         model = self.model()
         idx = model.index(index, 0)
-        style = model.data(idx, Qt.ItemDataRole.DisplayRole)
-        QApplication.setStyle(style)
+        if idx.isValid():
+            style = model.data(idx, Qt.ItemDataRole.DisplayRole)
+            QApplication.setStyle(style)

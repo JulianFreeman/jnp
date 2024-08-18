@@ -1,5 +1,11 @@
 # 版本日志
 
+## v0.3.3
+
+- misc 增加 `get_excepthook_for`
+- gui 增加 `DebugOutputButton` 和 `run_some_task`
+- `StyleComboBox` 提供修改默认值的参数
+
 ## v0.3.2
 
 - 增加 `IconPushButton` 和 `get_icon_from_svg`

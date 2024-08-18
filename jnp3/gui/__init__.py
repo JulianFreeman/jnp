@@ -6,9 +6,11 @@ except ModuleNotFoundError:
 
 
 from .misc import accept_warning, get_icon_from_svg
+from .thread import run_some_task
 from .widgets import *
 
 
 __all__ = ["accept_warning", "StyleComboBox", "PushButtonWithItem",
            "HorizontalLine", "VerticalLine", "Card", "CardsArea",
-           "IconPushButton", "get_icon_from_svg"]
+           "IconPushButton", "get_icon_from_svg", "DebugOutputButton",
+           "run_some_task"]

@@ -1,6 +1,14 @@
 # coding: utf8
+import sys
+import time
+import logging
+
 from PySide6 import QtWidgets, QtCore, QtGui
-from jnp3.gui import CardsArea, Card, IconPushButton
+from jnp3.gui import (
+    CardsArea, Card, IconPushButton, StyleComboBox,
+    DebugOutputButton, run_some_task
+)
+from jnp3.misc import get_excepthook_for
 
 
 class UiWg(object):
@@ -103,11 +111,19 @@ class UiWg(object):
         window.setLayout(self.vly_m)
 
 
+def some_func(logger: logging.Logger):
+    for i in range(10):  # 假设要处理 10 个文件
+        time.sleep(1)  # 模拟文件修改耗时
+        message = f"文件 {i + 1}/10 已修改完成"
+        logger.info(message)  # 记录日志
+
+
 class Wg(QtWidgets.QWidget):
 
-    def __init__(self, parent=None):
+    def __init__(self, logger: logging.Logger, parent=None):
         super().__init__(parent)
         self.ui = UiWg(self)
+        self.logger = logger
         # self.vly_m = QtWidgets.QVBoxLayout()
         # self.setLayout(self.vly_m)
         #
@@ -115,6 +131,10 @@ class Wg(QtWidgets.QWidget):
         # self.vly_m.addWidget(self.pbn_1)
         # self.lne_1 = QtWidgets.QLineEdit("world", self)
         # self.vly_m.addWidget(self.lne_1)
+        self.ui.pbn_svg.clicked.connect(self.on_pbn_svg_clicked)
+
+    def on_pbn_svg_clicked(self):
+        run_some_task("提示", "正在修改……", self, some_func, logger=self.logger)
 
 
 # 图标来自 https://freeicons.io/profile/75801
@@ -174,6 +194,11 @@ class MainWindow(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.logger = logging.getLogger()
+        self.logger.setLevel(logging.INFO)
+
+        sys.excepthook = get_excepthook_for(self.logger)
+
         self.vly_m = QtWidgets.QVBoxLayout()
         self.setLayout(self.vly_m)
 
@@ -181,20 +206,25 @@ class MainWindow(QtWidgets.QWidget):
         self.ca.card_removed.connect(self.on_card_removed)
         self.vly_m.addWidget(self.ca)
 
-        self.c1 = self.ca.add_card(Wg(self), "示例1", QtGui.QIcon("chrome_32.png"))
-        self.c2 = self.ca.add_card(Wg(self), "示例2")
+        self.c1 = self.ca.add_card(Wg(self.logger, self), "示例1", QtGui.QIcon("chrome_32.png"))
+        self.c2 = self.ca.add_card(StyleComboBox(0, parent=self), "示例2")
+        self.ca.add_card(Wg(self.logger, self), "示例4")
         self.c3 = self.ca.add_card(title="示例3", icon=QtGui.QIcon("chrome_32.png"))
+        self.ca.add_card(DebugOutputButton(self.logger, text="打开调试窗口", parent=self), "调试窗口")
+
+        self.logger.warning("hahahah")
+        self.logger.error("hehehe")
 
     def sizeHint(self):
         return QtCore.QSize(300, 100)
 
     def on_card_removed(self, card: Card):
-        print(card.title)
+        self.logger.info(card.title)
+        print(1 / 0)
 
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication()
-    app.setStyle("Fusion")
     win = MainWindow()
     win.show()
     app.exec()

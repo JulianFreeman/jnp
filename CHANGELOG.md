@@ -1,5 +1,11 @@
 # 版本日志
 
+## v0.3.2
+
+- 增加 `IconPushButton` 和 `get_icon_from_svg`
+- 更新 `Card` 的关闭按钮
+- 删除了 gui.misc 中几个不用的函数
+
 ## v0.3.1
 
 - `Card` 支持设置图标

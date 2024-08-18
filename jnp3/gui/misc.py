@@ -1,10 +1,10 @@
 # coding: utf8
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QPixmap, QPainter, QIcon
 from PySide6.QtWidgets import (
     QWidget, QMessageBox
 )
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QPalette
-from PySide6.QtSql import QSqlDatabase
+from PySide6.QtSvg import QSvgRenderer
 
 
 def accept_warning(widget: QWidget, condition: bool,
@@ -16,27 +16,15 @@ def accept_warning(widget: QWidget, condition: bool,
     return False
 
 
-def get_sql_database(conn_name: str, file_path: str) -> QSqlDatabase:
-    if QSqlDatabase.contains(conn_name):
-        db = QSqlDatabase.database(conn_name, open=False)
-    else:
-        db = QSqlDatabase.addDatabase("QSQLITE", conn_name)
-        db.setDatabaseName(file_path)
+def get_icon_from_svg(svg_data: str, w: int = None, h: int = None) -> QIcon:
+    w = 128 if w is None else w
+    h = 128 if h is None else h
 
-    return db
+    renderer = QSvgRenderer(svg_data.encode("utf-8"))
+    pixmap = QPixmap(w, h)
+    pixmap.fill(Qt.transparent)
+    painter = QPainter(pixmap)
+    renderer.render(painter)
+    painter.end()
 
-
-def change_color(widget: QWidget,
-                 role: QPalette.ColorRole,
-                 color: str | Qt.GlobalColor):
-    pal = widget.palette()
-    pal.setColor(role, color)
-    widget.setPalette(pal)
-
-
-def change_font(widget: QWidget, family: str, size: int, bold: bool = False):
-    font = widget.font()
-    font.setFamily(family)
-    font.setPointSize(size)
-    font.setBold(bold)
-    widget.setFont(font)
+    return QIcon(pixmap)

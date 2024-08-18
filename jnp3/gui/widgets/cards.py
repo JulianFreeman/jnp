@@ -7,6 +7,19 @@ from PySide6.QtWidgets import (
 )
 from .lines import HorizontalLine
 from .buttons import PushButtonWithItem
+from ..misc import get_icon_from_svg
+
+
+# 图标来自 https://freeicons.io/profile/3
+red_close_svg = """
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 60.963 60.842" style="enable-background:new 0 0 60.963 60.842;" xml:space="preserve">
+<path style="fill: rgb(247, 5, 17);" d="M59.595,52.861L37.094,30.359L59.473,7.98c1.825-1.826,1.825-4.786,0-6.611
+c-1.826-1.825-4.785-1.825-6.611,0L30.483,23.748L8.105,1.369c-1.826-1.825-4.785-1.825-6.611,0c-1.826,1.826-1.826,4.786,0,6.611
+l22.378,22.379L1.369,52.861c-1.826,1.826-1.826,4.785,0,6.611c0.913,0.913,2.109,1.369,3.306,1.369s2.393-0.456,3.306-1.369
+l22.502-22.502l22.501,22.502c0.913,0.913,2.109,1.369,3.306,1.369s2.393-0.456,3.306-1.369
+C61.42,57.647,61.42,54.687,59.595,52.861z" id="id_101"></path>
+</svg>
+"""
 
 
 class Card(QGroupBox):
@@ -23,9 +36,11 @@ class Card(QGroupBox):
 
         self.lb_icon = QLabel(self)
         self.lb_title = QLabel(self.title, self)
-        self.pbn_close = PushButtonWithItem(self, "❌", self)
+        self.pbn_close = PushButtonWithItem(self, "", self)
         self.pbn_close.setFixedWidth(25)
         self.pbn_close.setFlat(True)
+        self.pbn_close.setIcon(get_icon_from_svg(red_close_svg, 32, 32))
+
         self.hly_top.addWidget(self.lb_icon)
         self.hly_top.addWidget(self.lb_title)
         self.hly_top.addStretch(1)

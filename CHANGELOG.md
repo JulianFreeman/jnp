@@ -1,5 +1,9 @@
 # 版本日志
 
+## v0.3.4
+
+- 调整 `run_some_task` 的提示窗口堵塞
+
 ## v0.3.3
 
 - misc 增加 `get_excepthook_for`

@@ -87,7 +87,7 @@ class DebugOutputButton(QPushButton):
             self,
             logger: Logger,
             formatter: str | Formatter = None,
-            text: str = "",
+            text: str = "打开输出窗口",
             icon: QIcon | QPixmap = None,
             parent: QWidget = None,
     ):
@@ -119,6 +119,6 @@ class DebugOutputButton(QPushButton):
             self.logger.level,
             parent=self
         )
-
+        dd.setWindowTitle("输出窗口")
         dd.setWindowModality(Qt.WindowModality.NonModal)
         dd.show()

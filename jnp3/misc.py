@@ -7,6 +7,25 @@ from types import TracebackType
 from typing import Type
 
 
+class FakeLogger(object):
+    """当没有提供 Logger 时占位用的"""
+
+    def debug(self, msg: str):
+        pass
+
+    def info(self, msg: str):
+        pass
+
+    def warning(self, msg: str):
+        pass
+
+    def error(self, msg: str):
+        pass
+
+    def critical(self, msg: str):
+        pass
+
+
 def get_excepthook_for(logger: Logger):
 
     def my_excepthook(

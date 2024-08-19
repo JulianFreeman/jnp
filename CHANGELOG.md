@@ -1,5 +1,10 @@
 # 版本日志
 
+## v0.3.5
+
+- gui.misc 增加 `FakeLogger`
+- gui 增加 `CheckUpdateButton`
+
 ## v0.3.4
 
 - 调整 `run_some_task` 的提示窗口堵塞

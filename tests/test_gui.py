@@ -6,14 +6,14 @@ import logging
 from PySide6 import QtWidgets, QtCore, QtGui
 from jnp3.gui import (
     CardsArea, Card, IconPushButton, StyleComboBox,
-    DebugOutputButton, run_some_task
+    DebugOutputButton, run_some_task, CheckUpdateButton
 )
 from jnp3.misc import get_excepthook_for
 
 
 class UiWg(object):
 
-    def __init__(self, window: QtWidgets.QWidget):
+    def __init__(self, logger: logging.Logger, window: QtWidgets.QWidget):
         window.resize(540, 360)
         window.setWindowTitle("Style")
 
@@ -24,6 +24,13 @@ class UiWg(object):
         self.cbx_disable_wg = QtWidgets.QCheckBox("Disable widgets", window)
 
         self.pbn_svg = IconPushButton(watermelon_svg, parent=window)
+        self.pbn_update = CheckUpdateButton(
+            update_url="https://updates.oranj.work/ChromHelper3.json",
+            app_name="AppUpdateTest",
+            current_version="1.0.0",
+            logger=logger,
+            parent=window
+        )
 
         self.hly_top = QtWidgets.QHBoxLayout()
         self.hly_top.addWidget(self.lb_style)
@@ -32,6 +39,7 @@ class UiWg(object):
         self.hly_top.addWidget(self.cbx_use_std)
         self.hly_top.addWidget(self.cbx_disable_wg)
         self.hly_top.addWidget(self.pbn_svg)
+        self.hly_top.addWidget(self.pbn_update)
 
         self.gbx_left = QtWidgets.QGroupBox("Group 1", window)
         self.rbn_1 = QtWidgets.QRadioButton("Radio button 1", self.gbx_left)
@@ -122,7 +130,7 @@ class Wg(QtWidgets.QWidget):
 
     def __init__(self, logger: logging.Logger, parent=None):
         super().__init__(parent)
-        self.ui = UiWg(self)
+        self.ui = UiWg(logger, self)
         self.logger = logger
         # self.vly_m = QtWidgets.QVBoxLayout()
         # self.setLayout(self.vly_m)
@@ -208,7 +216,6 @@ class MainWindow(QtWidgets.QWidget):
 
         self.c1 = self.ca.add_card(Wg(self.logger, self), "示例1", QtGui.QIcon("chrome_32.png"))
         self.c2 = self.ca.add_card(StyleComboBox(0, parent=self), "示例2")
-        self.ca.add_card(Wg(self.logger, self), "示例4")
         self.c3 = self.ca.add_card(title="示例3", icon=QtGui.QIcon("chrome_32.png"))
         self.ca.add_card(DebugOutputButton(self.logger, text="打开调试窗口", parent=self), "调试窗口")
 
@@ -216,7 +223,7 @@ class MainWindow(QtWidgets.QWidget):
         self.logger.error("hehehe")
 
     def sizeHint(self):
-        return QtCore.QSize(300, 100)
+        return QtCore.QSize(860, 640)
 
     def on_card_removed(self, card: Card):
         self.logger.info(card.title)

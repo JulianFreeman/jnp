@@ -13,4 +13,4 @@ from .widgets import *
 __all__ = ["accept_warning", "StyleComboBox", "PushButtonWithItem",
            "HorizontalLine", "VerticalLine", "Card", "CardsArea",
            "IconPushButton", "get_icon_from_svg", "DebugOutputButton",
-           "run_some_task"]
+           "run_some_task", "CheckUpdateButton"]

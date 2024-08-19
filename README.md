@@ -15,3 +15,9 @@ pip install jnp3
 ```shell
 pip install jnp3[gui]
 ```
+
+如果要使用 *检查更新* 按钮
+
+```shell
+pip install jnp3[gui-with-update]
+```

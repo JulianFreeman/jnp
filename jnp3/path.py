@@ -32,9 +32,11 @@ def path_exists(path: str | Path) -> bool:
 
 def get_log_dir() -> str | None:
     if sys.platform == "win32":
-        log_dir = os.path.expandvars("%appdata%")
+        log_dir = Path(os.path.expanduser("~"), "AppData", "Roaming")
     elif sys.platform == "darwin":
-        log_dir = os.path.expanduser("~") + "/Library/Application Support"
+        log_dir = Path(os.path.expanduser("~"),  "Library", "Application Support")
     else:
         return None
-    return log_dir if path_exists(log_dir) else None
+    if not log_dir.exists():
+        log_dir.mkdir(parents=True, exist_ok=True)
+    return str(log_dir)

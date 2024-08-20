@@ -1,5 +1,10 @@
 # 版本日志
 
+## v0.3.7
+
+- 修复 dict 中 `get_with_chained_keys` 函数的bug
+- 优化 path 中的 `get_log_dir`
+
 ## v0.3.6
 
 - 修复未安装可选依赖时报错的问题

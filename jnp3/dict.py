@@ -12,6 +12,8 @@ def get_with_chained_keys(dic: dict, keys: list, default=None):
     :param default: 找不到键时的默认返回值
     :return:
     """
+    if not isinstance(dic, dict):
+        return default
     if len(keys) == 0:
         return default
     k = keys[0]

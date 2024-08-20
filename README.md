@@ -16,7 +16,9 @@ pip install jnp3
 pip install jnp3[gui]
 ```
 
-如果要使用 *检查更新* 按钮
+> 注意，0.3.5 版本不要使用上述命令，有bug，该bug在 0.3.6 修复
+
+如果要使用 *检查更新* 按钮（0.3.5 以上）
 
 ```shell
 pip install jnp3[gui-with-update]

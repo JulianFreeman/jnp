@@ -6,7 +6,8 @@ import logging
 from PySide6 import QtWidgets, QtCore, QtGui
 from jnp3.gui import (
     CardsArea, Card, IconPushButton, StyleComboBox,
-    DebugOutputButton, run_some_task, CheckUpdateButton
+    DebugOutputButton, run_some_task, CheckUpdateButton,
+    create_mono_icon, create_round_icon_from_pixmap
 )
 from jnp3.misc import get_excepthook_for
 
@@ -25,12 +26,17 @@ class UiWg(object):
 
         self.pbn_svg = IconPushButton(watermelon_svg, parent=window)
         self.pbn_update = CheckUpdateButton(
-            update_url="https://updates.oranj.work/ChromHelper3.json",
-            app_name="AppUpdateTest",
+            app_name="ChromHelper3",
             current_version="1.0.0",
             logger=logger,
             parent=window
         )
+
+        icon1 = create_mono_icon(QtGui.QRgba64.fromArgb32(2 ** 32 + -13625057), "rect", 96)
+        icon2 = create_mono_icon(QtGui.QRgba64.fromArgb32(2 ** 32 + -3413569), "round", 96)
+        self.pbn_color1 = IconPushButton(icon1, parent=window)
+        self.pbn_color2 = IconPushButton(icon2, parent=window)
+        self.pbn_color3 = IconPushButton(create_round_icon_from_pixmap(icon1.pixmap(96, 96)), parent=window)
 
         self.hly_top = QtWidgets.QHBoxLayout()
         self.hly_top.addWidget(self.lb_style)
@@ -40,6 +46,9 @@ class UiWg(object):
         self.hly_top.addWidget(self.cbx_disable_wg)
         self.hly_top.addWidget(self.pbn_svg)
         self.hly_top.addWidget(self.pbn_update)
+        self.hly_top.addWidget(self.pbn_color1)
+        self.hly_top.addWidget(self.pbn_color2)
+        self.hly_top.addWidget(self.pbn_color3)
 
         self.gbx_left = QtWidgets.QGroupBox("Group 1", window)
         self.rbn_1 = QtWidgets.QRadioButton("Radio button 1", self.gbx_left)

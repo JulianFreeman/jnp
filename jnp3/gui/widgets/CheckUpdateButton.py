@@ -20,9 +20,9 @@ class CheckUpdateButton(QPushButton):
 
     def __init__(
             self,
-            update_url: str,
             app_name: str,
             current_version: str,
+            update_url: str = None,
             logger: Logger | FakeLogger = None,
             text: str = "检查更新",
             icon: QIcon | QPixmap = None,
@@ -33,6 +33,8 @@ class CheckUpdateButton(QPushButton):
         else:
             super().__init__(icon=icon, text=text, parent=parent)
 
+        if update_url is None:
+            update_url = f"https://karlblue.github.io/update_repo/{app_name}.json"
         self.update_url = update_url
         self.app_name = app_name
         self.current_version = current_version

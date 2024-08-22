@@ -4,6 +4,8 @@
 
 - 修复 dict 中 `get_with_chained_keys` 函数的bug
 - 优化 path 中的 `get_log_dir`
+- gui.misc 添加 `create_mono_icon`，`create_round_icon_from_pixmap`
+- `CheckUpdateButton` 提供了默认网址
 
 ## v0.3.6
 

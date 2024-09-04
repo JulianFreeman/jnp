@@ -1,9 +1,10 @@
 # coding: utf8
-from PySide6.QtCore import Signal, QSize
-from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QPushButton, QWidget
-
-from ..misc import get_icon_from_svg
+from .._compat import (
+    QSize, Signal,
+    QIcon,
+    QPushButton, QWidget,
+)
+from ..icon import get_icon_from_svg
 
 
 class PushButtonWithItem(QPushButton):

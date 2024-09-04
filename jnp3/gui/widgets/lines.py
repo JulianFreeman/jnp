@@ -1,5 +1,7 @@
 # coding: utf8
-from PySide6.QtWidgets import QFrame, QWidget
+from .._compat import (
+    QFrame, QWidget,
+)
 
 
 class HorizontalLine(QFrame):

@@ -1,8 +1,10 @@
 # coding: utf8
 from typing import Callable
-from PySide6.QtCore import QThread, QObject, Qt, QSize
-from PySide6.QtGui import QKeyEvent
-from PySide6.QtWidgets import QDialog, QWidget, QVBoxLayout, QLabel
+from ._compat import (
+    Qt, QObject, QSize, QThread,
+    QKeyEvent,
+    QDialog, QLabel, QVBoxLayout, QWidget,
+)
 
 
 class TaskWorker(QThread):

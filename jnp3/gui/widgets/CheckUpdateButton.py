@@ -7,11 +7,11 @@ import py7zr
 import subprocess
 from logging import Logger
 from pathlib import Path
-from PySide6.QtGui import QIcon, QPixmap
-from PySide6.QtWidgets import (
-    QPushButton, QWidget, QMessageBox, QApplication,
-)
 
+from .._compat import (
+    QIcon, QPixmap,
+    QApplication, QMessageBox, QPushButton, QWidget,
+)
 from ..thread import run_some_task
 from jnp3.misc import FakeLogger
 

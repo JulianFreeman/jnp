@@ -1,13 +1,12 @@
 # coding: utf8
-from PySide6.QtCore import Signal
-from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QLabel, QGroupBox,
-    QScrollArea
+from .._compat import (
+    Signal,
+    QIcon,
+    QGroupBox, QHBoxLayout, QLabel, QScrollArea, QVBoxLayout, QWidget,
 )
 from .lines import HorizontalLine
 from .buttons import PushButtonWithItem
-from ..misc import get_icon_from_svg
+from ..icon import get_icon_from_svg
 
 
 # 图标来自 https://freeicons.io/profile/3

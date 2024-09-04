@@ -3,11 +3,19 @@ import sys
 import time
 import logging
 
-from PySide6 import QtWidgets, QtCore, QtGui
+try:
+    from PySide6 import QtWidgets, QtCore, QtGui
+except ImportError:
+    try:
+        from PySide2 import QtWidgets, QtCore, QtGui
+    except ImportError:
+        pass
+
 from jnp3.gui import (
     CardsArea, Card, IconPushButton, StyleComboBox,
     DebugOutputButton, run_some_task, CheckUpdateButton,
-    create_mono_icon, create_round_icon_from_pixmap
+    create_mono_icon, create_round_icon_from_pixmap,
+    argb32_to_rgb,
 )
 from jnp3.misc import get_excepthook_for
 
@@ -32,8 +40,8 @@ class UiWg(object):
             parent=window
         )
 
-        icon1 = create_mono_icon(QtGui.QRgba64.fromArgb32(2 ** 32 + -13625057), "rect", 96)
-        icon2 = create_mono_icon(QtGui.QRgba64.fromArgb32(2 ** 32 + -3413569), "round", 96)
+        icon1 = create_mono_icon(argb32_to_rgb(2 ** 32 + -13625057), "rect", 96)
+        icon2 = create_mono_icon(argb32_to_rgb(2 ** 32 + -3413569), "round", 96)
         self.pbn_color1 = IconPushButton(icon1, parent=window)
         self.pbn_color2 = IconPushButton(icon2, parent=window)
         self.pbn_color3 = IconPushButton(create_round_icon_from_pixmap(icon1.pixmap(96, 96)), parent=window)
@@ -243,4 +251,7 @@ if __name__ == '__main__':
     app = QtWidgets.QApplication()
     win = MainWindow()
     win.show()
-    app.exec()
+    if hasattr(app, "exec"):
+        app.exec()
+    else:
+        app.exec_()

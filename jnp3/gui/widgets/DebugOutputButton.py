@@ -3,13 +3,10 @@ from logging import (
     Logger, Handler, LogRecord,
     Formatter,
 )
-from PySide6.QtCore import QSize, Qt
-from PySide6.QtGui import (
-    QIcon, QPixmap, QCloseEvent
-)
-from PySide6.QtWidgets import (
-    QPushButton, QWidget, QTextEdit,
-    QDialog, QVBoxLayout,
+from .._compat import (
+    Qt, QSize,
+    QCloseEvent, QIcon, QPixmap,
+    QDialog, QPushButton, QTextEdit, QVBoxLayout, QWidget,
 )
 
 

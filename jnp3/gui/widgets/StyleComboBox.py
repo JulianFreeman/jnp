@@ -1,12 +1,9 @@
 # coding: utf8
 import sys
-from PySide6 import __version__ as pyside6_version
-from PySide6.QtCore import (
-    QAbstractListModel, QModelIndex,
-    Qt, QObject,
-)
-from PySide6.QtWidgets import (
-    QComboBox, QApplication, QWidget,
+from .._compat import (
+    Qt, QAbstractListModel, QModelIndex, QObject,
+    QApplication, QComboBox, QWidget,
+    pyside_version,
 )
 
 
@@ -16,7 +13,7 @@ class _StyleListModel(QAbstractListModel):
         super().__init__(parent)
         if sys.platform == "win32":
             self.styles = ["windowsvista", "Fusion", "Windows"]
-            ver = list(map(lambda s: int(s), pyside6_version.split(".")))
+            ver = list(map(lambda s: int(s), pyside_version.split(".")))
             if ver >= [6, 7, 0]:
                 self.styles.insert(0, "windows11")
         elif sys.platform == "darwin":

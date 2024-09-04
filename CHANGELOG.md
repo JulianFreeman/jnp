@@ -1,5 +1,11 @@
 # 版本日志
 
+## v0.4.0
+
+- 兼容 Python 3.10
+- 兼容 MacOS 10.13
+- 更改了可选依赖的名称，与之前版本不兼容
+
 ## v0.3.7
 
 - 修复 dict 中 `get_with_chained_keys` 函数的bug

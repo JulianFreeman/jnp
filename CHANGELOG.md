@@ -1,5 +1,9 @@
 # 版本日志
 
+## v0.5.1
+
+- 修复 `CheckUpdateButton` 无法区分 MacOS 10 和 11 版本的问题
+
 ## v0.5.0
 
 - 移除 `CheckUpdateButton` 的自动下载功能

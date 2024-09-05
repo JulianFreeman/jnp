@@ -1,6 +1,7 @@
 # coding: utf8
 import sys
 import json
+import platform
 import requests
 from logging import Logger
 
@@ -80,7 +81,18 @@ class CheckUpdateButton(QPushButton):
                 self.msg_when_no_update = "当前已是最新版本。"
                 return
 
-            download_url = update_info[latest_version][sys.platform]
+            if sys.platform != "darwin":
+                download_url = update_info[latest_version][sys.platform]
+            else:
+                inner = update_info[latest_version][sys.platform]
+                if isinstance(inner, dict):
+                    mac_ver = platform.mac_ver()[0]
+                    if mac_ver.startswith("10."):
+                        download_url = inner["10"]
+                    else:
+                        download_url = inner["11"]
+                else:
+                    download_url = inner
             self.has_update = True
             self.download_url = download_url
             self.latest_version = latest_version

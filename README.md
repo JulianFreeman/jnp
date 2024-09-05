@@ -16,15 +16,9 @@ pip install jnp3
 pip install jnp3[gui6]
 ```
 
-如果要使用 *检查更新* 按钮
-
-```shell
-pip install jnp3[gui6-with-update]
-```
-
 ### 安装 pyside2 工具集
 
-pyside2 主要是为了兼容 MacOS 10.13，且因为 _检查更新_ 按钮在 MacOS 系统不会引起报毒，所以不单独排除
+pyside2 主要是为了兼容 MacOS 10.13
 
 ```shell
 pip install jnp3[gui2]

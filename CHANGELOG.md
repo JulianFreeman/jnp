@@ -1,5 +1,9 @@
 # 版本日志
 
+## v0.5.0
+
+- 移除 `CheckUpdateButton` 的自动下载功能
+
 ## v0.4.0
 
 - 兼容 Python 3.10

@@ -1,5 +1,9 @@
 # 版本日志
 
+## v0.5.2
+
+- 修复 `CheckUpdateButton` 在 MacOS 上识别系统错误的问题
+
 ## v0.5.1
 
 - 修复 `CheckUpdateButton` 无法区分 MacOS 10 和 11 版本的问题

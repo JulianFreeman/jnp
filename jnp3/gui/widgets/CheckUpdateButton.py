@@ -1,8 +1,8 @@
 # coding: utf8
 import sys
 import json
-import platform
 import requests
+import subprocess
 from logging import Logger
 
 from .._compat import (
@@ -131,7 +131,7 @@ class CheckUpdateButton(QPushButton):
             else:
                 inner = update_info[latest_version][sys.platform]
                 if isinstance(inner, dict):
-                    mac_ver = platform.mac_ver()[0]
+                    mac_ver = subprocess.check_output(["sw_vers", "-productVersion"]).decode("utf8").strip()
                     if mac_ver.startswith("10."):
                         download_url = inner["10"]
                     else:

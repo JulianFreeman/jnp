@@ -6,12 +6,66 @@ import requests
 from logging import Logger
 
 from .._compat import (
-    Qt,
+    Qt, QSize,
     QIcon, QPixmap,
-    QMessageBox, QPushButton, QWidget,
+    QDialog, QHBoxLayout, QLabel, QMessageBox, QPushButton, QVBoxLayout, QWidget,
 )
+from ..misc import get_exec
 from ..thread import run_some_task
+from ..icon import get_icon_from_svg
 from jnp3.misc import FakeLogger
+
+
+# 来自 https://freeicons.io/profile/726
+info_svg = """
+<svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" enable-background="new 0 0 48 48">
+    <circle fill="#2196F3" cx="24" cy="24" r="21"></circle>
+    <rect x="22" y="22" fill="#fff" width="4" height="11"></rect>
+    <circle fill="#fff" cx="24" cy="16.5" r="2.5"></circle>
+</svg>
+"""
+
+
+class LinkDialog(QDialog):
+
+    def __init__(
+            self,
+            latest_version: str,
+            download_url: str,
+            parent: QWidget = None
+    ):
+        super().__init__(parent)
+
+        self.setWindowTitle("提示")
+        self.vly_m = QVBoxLayout(self)
+        self.setLayout(self.vly_m)
+
+        self.hly_top = QHBoxLayout()
+        self.vly_m.addLayout(self.hly_top)
+
+        self.lb_icon = QLabel(self)
+        self.lb_icon.setPixmap(get_icon_from_svg(info_svg, 40, 40).pixmap(40, 40))
+        self.hly_top.addWidget(self.lb_icon)
+
+        self.lb_text = QLabel(self)
+        self.lb_text.setTextFormat(Qt.TextFormat.RichText)
+        self.lb_text.setText(
+            f"发现新版本：v{latest_version}。"
+            f"点击 <a href='{download_url}' style='text-decoration: none; color: red'>下载</a>。"
+        )
+        self.lb_text.setOpenExternalLinks(True)  # 允许打开外部链接
+        self.hly_top.addWidget(self.lb_text)
+
+        self.hly_bot = QHBoxLayout()
+        self.vly_m.addLayout(self.hly_bot)
+        self.hly_bot.addStretch(1)
+
+        self.pbn_ok = QPushButton("Ok", self)
+        self.pbn_ok.clicked.connect(self.accept)
+        self.hly_bot.addWidget(self.pbn_ok)
+
+    def sizeHint(self):
+        return QSize(100, 10)
 
 
 class CheckUpdateButton(QPushButton):
@@ -55,17 +109,8 @@ class CheckUpdateButton(QPushButton):
             QMessageBox.information(self, "提示", self.msg_when_no_update)
             return
 
-        msg_box = QMessageBox(self.wg_parent)
-        msg_box.setIcon(QMessageBox.Icon.Information)
-        msg_box.setWindowTitle("提示")
-        msg_box.setTextFormat(Qt.TextFormat.RichText)
-        msg_box.setText(f"发现新版本：v{self.latest_version}。"
-                        f"点击 <a href='{self.download_url}' style='text-decoration: none; color: red'>下载</a>。")
-        msg_box.setStandardButtons(QMessageBox.StandardButton.Ok)
-        if hasattr(msg_box, "exec"):
-            msg_box.exec()
-        else:
-            msg_box.exec_()
+        msg_box = LinkDialog(self.latest_version, self.download_url, self.wg_parent)
+        get_exec(msg_box)()
 
     def check_update(self):
         try:

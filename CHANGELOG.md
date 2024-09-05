@@ -3,6 +3,8 @@
 ## v0.5.1
 
 - 修复 `CheckUpdateButton` 无法区分 MacOS 10 和 11 版本的问题
+- 修复 MacOS 无法在提示框中显示超链接的问题
+- gui.misc 添加 `get_exec`
 
 ## v0.5.0
 
